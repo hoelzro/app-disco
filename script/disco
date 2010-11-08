@@ -1,0 +1,37 @@
+#!/usr/bin/env perl
+
+use strict;
+use warnings;
+
+use App::Disco;
+
+App::Disco->run;
+
+__END__
+
+=head1 NAME
+
+disco - An XMPP client in Perl that specializes in service discovery.
+
+=head1 SYNOPSIS
+
+  disco
+
+=head1 AUTHOR
+
+Rob Hoelz, C<< rob at hoelz.ro >>
+
+=head1 BUGS
+
+Please report any bugs or feature requests to C<bug-disco at rt.cpan.org>, or through
+the web interface at L<http://rt.cpan.org/NoAuth/ReportBug.html?Queue=disco>. I will
+be notified, and then you'll automatically be notified of progress on your bug as I make changes.
+
+=head1 COPYRIGHT & LICENSE
+
+Copyright 2010 Rob Hoelz.
+
+This module is free software; you can redistribute it and/or modify it under
+the same terms as Perl itself.
+
+=cut

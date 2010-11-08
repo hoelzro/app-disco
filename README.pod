@@ -1,0 +1,6 @@
+=head1 NAME
+
+Disco is an XMPP client written in Perl that specializes in service discovery.
+Read the POD documentation for the disco script file for more information.
+
+=cut
