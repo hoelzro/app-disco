@@ -38,7 +38,7 @@ sub BUILD {
     my $edit_button   = Gtk2::Button->new_from_stock('gtk-edit');
     my $remove_button = Gtk2::Button->new_from_stock('gtk-remove');
 
-    $add_button->signal_connect(activate => sub {
+    $add_button->signal_connect(pressed => sub {
         use feature 'say';
         say 'Add account';
     });
