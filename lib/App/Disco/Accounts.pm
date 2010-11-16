@@ -89,7 +89,7 @@ sub remove_account {
 
     my $accounts = $self->accounts;
 
-    my %remove_me = map { $_ => $_ } grep { $_ ~~ $account } @$accounts;
+    my %remove_me = map { $_ => $_ } grep { $_->{jid} eq $account } @$accounts;
 
     @$accounts = grep {
         ! exists $remove_me{$_}
