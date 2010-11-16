@@ -23,6 +23,12 @@ has accounts => (
     required => 1,
 );
 
+has account_creator => (
+    is       => 'ro',
+    isa      => 'App::Disco::UI::AccountCreator',
+    required => 1,
+);
+
 sub BUILD {
     my ( $self ) = @_;
 
