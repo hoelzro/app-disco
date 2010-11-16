@@ -79,6 +79,9 @@ sub BUILD {
         my $iter = $model->append;
         $model->set($iter, 0 => $name);
     }
+
+    $view->get_selection->set_mode('single');
+
     $window->set_default_size(600, 400);
     my $box = Gtk2::VBox->new;
     $window->add($box);
