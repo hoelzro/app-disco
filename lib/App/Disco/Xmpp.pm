@@ -43,7 +43,7 @@ sub handle_account_removed {
 
     my $existing_account = $client->get_account($account->{jid});
     if($existing_account) {
-        $client->remove_account($existing_account);
+        $client->remove_account($account->{jid});
     }
 }
 
