@@ -45,8 +45,23 @@ sub BUILD {
     my $remove_button = Gtk2::Button->new_from_stock('gtk-remove');
 
     $add_button->signal_connect(pressed => sub {
-        use feature 'say';
-        say 'Add account';
+        $self->account_creator->create;
+    });
+
+    $edit_button->signal_connect(pressed => sub {
+        my $selection = $view->get_selection;
+        $selection = $selection->get_selected;
+        ( $selection ) = $model->get($selection, 0);
+        $self->account_creator->edit($selection);
+    });
+
+    $remove_button->signal_connect(pressed => sub {
+        my $selection = $view->get_selection;
+        $selection = $selection->get_selected;
+        my ( $jid ) = $model->get($selection, 0);
+        $model->remove($selection);
+        $self->accounts->remove_account($jid);
+        $self->accounts->save;
     });
 
     $view->append_column($column);
