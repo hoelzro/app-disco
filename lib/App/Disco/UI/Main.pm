@@ -22,7 +22,7 @@ sub BUILD {
     $window->signal_connect(destroy => sub {
         Gtk2->main_quit;
     });
-    $window->signal_connect('key-release-event', sub {
+    $window->signal_connect(key_release_event => sub {
         my ( undef, $event ) = @_;
 
         if($event->keyval == $Gtk2::Gdk::Keysyms{Escape}) {
