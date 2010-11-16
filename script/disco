@@ -5,6 +5,11 @@ use warnings;
 
 use App::Disco;
 
+use Carp qw(confess cluck);
+
+$SIG{__WARN__} = \&cluck;
+$SIG{__DIE__} = \&confess;
+
 App::Disco->run;
 
 __END__
