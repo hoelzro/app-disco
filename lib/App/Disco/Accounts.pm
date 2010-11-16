@@ -1,6 +1,7 @@
 package App::Disco::Accounts;
 
 use File::Spec::Functions qw(catfile);
+use List::MoreUtils qw(first_value);
 use Moose;
 use YAML qw(DumpFile LoadFile);
 use namespace::clean -except => 'meta';
@@ -98,6 +99,12 @@ sub remove_account {
     foreach (values %remove_me) {
         $self->fire_trigger(removed => $_);
     }
+}
+
+sub get_account {
+    my ( $self, $jid ) = @_;
+
+    return first_value { $_->{jid} eq $jid } @{ $self->accounts};
 }
 
 1;
