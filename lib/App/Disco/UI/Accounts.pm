@@ -1,6 +1,7 @@
 package App::Disco::UI::Accounts;
 
 use Gtk2;
+use Gtk2::Gdk::Keysyms;
 use Moose;
 
 our $VERSION = '0.01';
@@ -71,6 +72,14 @@ sub BUILD {
 
         $edit_button->set_sensitive(defined $selection);
         $remove_button->set_sensitive(defined $selection);
+    });
+
+    $window->signal_connect(key_release_event => sub {
+        my ( undef, $event ) = @_;
+
+        if($event->keyval == $Gtk2::Gdk::Keysyms{Escape}) {
+            $window->hide;
+        }
     });
 
     $view->append_column($column);
