@@ -64,6 +64,15 @@ sub BUILD {
         $self->accounts->save;
     });
 
+    $view->get_selection->signal_connect(changed => sub {
+        my ( $selection ) = @_;
+
+        $selection = $selection->get_selected;
+
+        $edit_button->set_sensitive(defined $selection);
+        $remove_button->set_sensitive(defined $selection);
+    });
+
     $view->append_column($column);
     foreach my $account (@$accounts) {
         my $name = exists $account->{name} ? $account->{name} : $account->{jid};
