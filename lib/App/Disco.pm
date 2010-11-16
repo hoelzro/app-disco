@@ -5,6 +5,7 @@ use warnings;
 
 use App::Disco::Accounts;
 use App::Disco::UI::Accounts;
+use App::Disco::UI::AccountCreator;
 use App::Disco::UI::Main;
 use App::Disco::Xmpp;
 
@@ -16,7 +17,10 @@ sub run {
     my $accounts = App::Disco::Accounts->new;
     $accounts->load;
     my $xmpp = App::Disco::Xmpp->new(accounts => $accounts);
-    my $accounts_ui = App::Disco::UI::Accounts->new(accounts => $accounts);
+    my $account_creator = App::Disco::UI::AccountCreator->new(
+        accounts => $accounts);
+    my $accounts_ui = App::Disco::UI::Accounts->new(accounts => $accounts,
+        account_creator => $account_creator);
     my $ui = App::Disco::UI::Main->new(
         accounts_ui => $accounts_ui,
         xmpp => $xmpp,
