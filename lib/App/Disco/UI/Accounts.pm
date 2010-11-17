@@ -45,18 +45,18 @@ sub BUILD {
     my $edit_button   = Gtk2::Button->new_from_stock('gtk-edit');
     my $remove_button = Gtk2::Button->new_from_stock('gtk-remove');
 
-    $add_button->signal_connect(pressed => sub {
+    $add_button->signal_connect(clicked => sub {
         $self->account_creator->create;
     });
 
-    $edit_button->signal_connect(pressed => sub {
+    $edit_button->signal_connect(clicked => sub {
         my $selection = $view->get_selection;
         $selection = $selection->get_selected;
         ( $selection ) = $model->get($selection, 0);
         $self->account_creator->edit($selection);
     });
 
-    $remove_button->signal_connect(pressed => sub {
+    $remove_button->signal_connect(clicked => sub {
         my $selection = $view->get_selection;
         $selection = $selection->get_selected;
         my ( $jid ) = $model->get($selection, 0);
