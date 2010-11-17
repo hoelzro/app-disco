@@ -33,12 +33,13 @@ has account_creator => (
 sub BUILD {
     my ( $self ) = @_;
 
-    my $window   = $self->window;
-    my $model    = Gtk2::ListStore->new('Glib::String');
-    my $accounts = $self->accounts->accounts;
-    my $view     = Gtk2::TreeView->new($model);
-    my $renderer = Gtk2::CellRendererText->new;
-    my $column   = Gtk2::TreeViewColumn->new_with_attributes('Account Name',
+    my $accel_group = Gtk2::AccelGroup->new;
+    my $window      = $self->window;
+    my $model       = Gtk2::ListStore->new('Glib::String');
+    my $accounts    = $self->accounts->accounts;
+    my $view        = Gtk2::TreeView->new($model);
+    my $renderer    = Gtk2::CellRendererText->new;
+    my $column      = Gtk2::TreeViewColumn->new_with_attributes('Account Name',
         $renderer, text => 0);
     my $buttons       = Gtk2::HBox->new;
     my $add_button    = Gtk2::Button->new_from_stock('gtk-add');
@@ -82,6 +83,13 @@ sub BUILD {
         }
     });
 
+    $add_button->add_accelerator(activate => $accel_group,
+        $Gtk2::Gdk::Keysyms{'a'}, 'control-mask', 'visible');
+    $edit_button->add_accelerator(activate => $accel_group,
+        $Gtk2::Gdk::Keysyms{'e'}, 'control-mask', 'visible');
+    $remove_button->add_accelerator(activate => $accel_group,
+        $Gtk2::Gdk::Keysyms{'r'}, 'control-mask', 'visible');
+
     $view->append_column($column);
     foreach my $account (@$accounts) {
         my $name = exists $account->{name} ? $account->{name} : $account->{jid};
@@ -94,6 +102,7 @@ sub BUILD {
     $window->set_default_size(600, 400);
     my $box = Gtk2::VBox->new;
     $window->add($box);
+    $window->add_accel_group($accel_group);
     $box->pack_start($view, 1, 1, 0);
     $buttons->pack_start(Gtk2::Label->new, 1, 0, 0);
     $buttons->pack_start($add_button, 0, 0, 0);
